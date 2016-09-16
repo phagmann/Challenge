@@ -63,3 +63,4 @@ puts "After"
 iii=image.transforms
 pp iii
 iii.output_image
+

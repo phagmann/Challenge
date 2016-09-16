@@ -1,4 +1,5 @@
 require 'pp'
+t1= Time.new
 class Image
     attr_accessor :list
     def initialize(list)
@@ -7,46 +8,33 @@ class Image
 
     def output_image
         list.each do |row|
-          rows=""
-          row.each do |col|
-            rows=rows + col.to_s
-          end
-          rows.to_i
-          puts rows
+            puts row.join
         end
     end
     #puts list[1].length
     #puts list.transpose[1].length
+
     def transforms
         new_list=list.transpose.transpose
-        row_index=-1
-        list.each do |row|
-            row_index=row_index+1
-            col_index=-1
-            row.each do |col|
-                col_index=col_index+1
-            if list[row_index][col_index] == 1
-                if row_index >=0  and col_index -1>= 0
-                    new_list[row_index][col_index-1]=1
-                end
-                if row_index-1 >= 0 and col_index >= 0
-                    new_list[row_index-1][col_index]=1
-                end
-                if row_index < list.transpose[row_index].length and col_index +1< list[col_index].length
-                    new_list[row_index][col_index+1]=1
-                end
-                if row_index+1 < list.transpose[row_index].length and col_index < list[col_index].length
-                    new_list[row_index+1][col_index]=1
-                end
+        list.each_with_index do |row,row_index|
+            row.each.each_with_index do |col, col_index|
+                next if list[row_index][col_index] != 1
+                new_list[row_index][col_index-1] = 1 if col_index -1 >= 0
+                
+                new_list[row_index-1][col_index] = 1 if row_index - 1 >= 0
+              
+                new_list[row_index][col_index+1] = 1 if col_index +1 < list[1].length
+                
+                
+                new_list[row_index+1][col_index] = 1 if row_index+1 < list.length
+                
             end
-
-            end
-
         end
         Image.new(new_list)
     end
 
 end
+
 def manhattan(image,n)
     if n == 0
         return image.output_image
@@ -61,18 +49,26 @@ end
 
 
 image = Image.new([
-  [0, 0, 0, 1, 0, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 ])
-manhattan(image,0)
+manhattan(image,5)
 puts ""
-manhattan(image,1)
-puts ""
-manhattan(image,2)
-puts ""
+
+t2= Time.new
+
+pp t2 - t1
