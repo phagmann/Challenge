@@ -11,8 +11,6 @@ class Image
             puts row.join
         end
     end
-    #puts list[1].length
-    #puts list.transpose[1].length
 
     def transforms
         new_list=list.transpose.transpose
