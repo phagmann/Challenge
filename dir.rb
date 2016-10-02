@@ -22,3 +22,6 @@ a = ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]
 puts dirReduc(a)
 u=["NORTH", "WEST", "SOUTH", "EAST"]
 pp dirReduc(u)
+
+
+

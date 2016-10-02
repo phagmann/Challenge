@@ -1,0 +1,57 @@
+<html>
+    <head>
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+    </head>
+    <body>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script >
+
+            $(function() {
+                var h2Element = $('h2');
+
+
+                var button = $('#button');
+                button.click(function() {
+                    var detailInput = $('#detail');
+                    var detailInputVal = detailInput.val();
+                    var fact ={
+                        "fact" : {
+                            "details" : detailInputVal
+                        }
+
+                    }
+                    $.post( "http://www.catfact.info/api/v1/facts.json",fact, function( data ) {
+                    console.log(data)
+                    });
+
+
+                });
+                    
+               
+                h2Element.click( function() {
+                    $.get( "http://www.catfact.info//api/v1/facts.json?page=1&per_page=3", function( data ) {
+                        var detail = data.facts[0].details;
+                        h2Element.html(detail);
+
+                        });
+
+                 });
+
+            });
+
+        </script>
+
+        <h1 class="headline">Hello!</h1>
+        <h2 class ="headline"> Goodbye :(</h2> 
+        <hr />
+        <input id= "detail" />
+        <button id="button"> Click me</button>
+    </body>
+
+<!-- var po = $("h2"); -->
+<!-- po.html("dieeeee") -->
+</html>

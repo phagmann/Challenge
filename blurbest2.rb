@@ -1,5 +1,22 @@
 require 'pp'
 t1= Time.new
+def two_d(r,c)
+
+  master=[]
+  r.times do |r_index|
+    row=[]
+    c.times do |c_index|
+      rand= rand(1..11)
+      if rand >= 9
+        row << 1
+      else
+        row << 0
+      end
+    end
+    master << row
+  end
+  return master
+end
 class Image
     attr_accessor :list
     def initialize(list)
@@ -13,7 +30,7 @@ class Image
     end
 
     def blur(dist)
-        rotation= [[1,1],[1,-1],[-1,-1],[-1,1]]
+        rotation= [ [1,1],[1,-1],[-1,-1],[-1,1] ]
         @list.each_with_index do |row,row_index| # iterates through each row by index
             row.each_with_index do |col, col_index| # iterates through each column by index
                 next if @list[row_index][col_index] != 1 #checks if the current iterative stop doesn't contains a 1
@@ -44,27 +61,8 @@ class Image
 end
 
 
-
-image = Image.new([
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-
-])
-
-Image.new(image.blur(5)).output_image
+image= Image.new(two_d(8,8))
+Image.new(image.blur(3))
 puts ""
 t2= Time.new
 
