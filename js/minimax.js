@@ -210,7 +210,7 @@ var q = new Tree();
 
 // debug(dfs(q))
 debug("")
-makeRandomTree (30, 4)
+makeRandomTree (80, 3)
 // (childern, depth)
 //code breaks if depth = 2
 
